@@ -1,1 +1,1 @@
-# Keyboard-Man-s-Navigation
+# KeyboardMan-Navigation
