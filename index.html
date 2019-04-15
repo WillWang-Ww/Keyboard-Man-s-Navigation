@@ -8,8 +8,8 @@
 </head>
 
 <body>
-    <main id="main">
-        
+    <main>
+        <div class="wrapper" id="main"></div>
     </main>
 <script>
     var keys = {
@@ -30,22 +30,36 @@
         'z': 'zhihu.com'
     }
 
-    //遍历keys 生成kbd
+    //遍历 keys 生成 kbd
     index = 0;
     while (index < keys['length']) {  //0 1 2
         div = document.createElement('div')
         main.appendChild(div)
         row = keys[index]        
             index2 = 0
-            while( index2 < row.length){
+            while( index2 < row.length){ //0-9 0-8 0-7
                 kbd = document.createElement('kbd')
                 kbd.textContent = row[index2]
+                button = document.createElement('button')
+                button.textContent = 'Edit'
+                button.id = row[index2]
+                button.onclick = function(click){
+                    key = click['target']['id']
+                    x = prompt('Edit The Website')
+                    hash[key] = x
+                }
+                kbd.appendChild(button)
                 div.appendChild(kbd)
                 index2 = index2 + 1
             }
+            index = index + 1
+        }
 
-        div.appendChild(kbd)
-        index = index + 1
+        document.onkeypress = function(listen){
+            key = listen['key']
+            website = hash[key]
+            //location.href = 'http://'+website 在地址栏输入
+            window.open('http://'+website,'_blank') //在窗口打开
         }
       
     
