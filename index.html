@@ -8,10 +8,8 @@
 </head>
 
 <body>
-    <main>
-        <div class="wrapper" id="keyboard">
-
-        </div>
+    <main id="main">
+        
     </main>
 <script>
     var keys = {
@@ -34,27 +32,22 @@
 
     //遍历keys 生成kbd
     index = 0;
-    while (index < keys['length']) {
+    while (index < keys['length']) {  //0 1 2
         div = document.createElement('div')
-        keyboard.appendChild(div)
-        row = keys[index]
-        index2 = 0
-        while (index2 < row['length']) {
-            kbd = document.createElement(kbd)
-            kbd.textContent = row[index2]
-            button = document.createElement('button')
-            button.textContent = 'Edit'
-            button.id = row[index]
+        main.appendChild(div)
+        row = keys[index]        
+            index2 = 0
+            while( index2 < row.length){
+                kbd = document.createElement('kbd')
+                kbd.textContent = row[index2]
+                div.appendChild(kbd)
+                index2 = index2 + 1
             }
-            index2 = index2 + 1
 
+        div.appendChild(kbd)
         index = index + 1
         }
-        document.onkeypress = function(x){
-            key = x['key']
-            website = hash[key]
-            window.open('http://'+website,'_blank')
-        }
+      
     
 </script>
 </body>
