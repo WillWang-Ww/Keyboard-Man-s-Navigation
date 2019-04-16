@@ -1,69 +1,71 @@
 <!DOCTYPE html>
 <html lang="zh-Hans">
-
 <head>
     <meta charset="UTF-8">
     <link rel="stylesheet" href="./style.css">
-    <title>My Navigation</title>
+    <title>KeyBoardManNavigation</title>
 </head>
-
 <body>
     <main>
-        <div class="wrapper" id="main"></div>
+        <div id="main"></div>
     </main>
-<script>
-    var keys = {
-        '0': { 0: 'q', 1: 'w', 2: 'e', 3: 'r', 4: 't', 5: 'y', 6: 'u', 7: 'i', 8: 'o', 9: 'p', length:10},
-        '1': { 0: 'a', 1: 's', 2: 'd', 3: 'f', 4: 'g', 5: 'h', 6: 'j', 7: 'k', 8: 'l', length:9 },
-        '2': { 0: 'z', 1: 'x', 2: 'c', 3: 'v', 4: 'b', 5: 'n', 6: 'm', 7: ',', length:8 },
-        'length': 3
-    }
+    <script>
+        var keys = {
+            '0': { 0: 'q', 1: 'w', 2: 'e', 3: 'r', 4: 't', 5: 'y', 6: 'u', 7: 'i', 8: 'o', 9: 'p', length: 10},
+            '1': { 0: 'a', 1: 's', 2: 'd', 3: 'f', 4: 'g', 5: 'h', 6: 'j', 7: 'k', 8: 'l', length: 9 },
+            '2': { 0: 'z', 1: 'x', 2: 'c', 3: 'v', 4: 'b', 5: 'n', 6: 'm', 7: ',', length: 8 },
+            length:3
+        }
 
-    var hash = {
-        'q': 'qq.com',
-        'w': 'weibo.com',
-        'e': 'ebay.com',
-        't': 'taobao.com',
-        'i': 'iqiyi.com',
-        'g': 'google.com',
-        'j': 'juejin.im',
-        'z': 'zhihu.com'
-    }
+        var hash = {
+            'q': 'qq.com',
+            'w': 'weibo.com',
+            'e': 'ebay.com',
+            't': 'taobao.com',
+            'i': 'iqiyi.com',
+            'g': 'google.com', 
+            'j': 'juejin.im',
+            'z': 'zhihu.com'
+        }
 
-    //遍历 keys 生成 kbd
-    index = 0;
-    while (index < keys['length']) {  //0 1 2
-        div = document.createElement('div')
-        main.appendChild(div)
-        row = keys[index]        
-            index2 = 0
-            while( index2 < row.length){ //0-9 0-8 0-7
-                kbd = document.createElement('kbd')
-                kbd.textContent = row[index2]
-                button = document.createElement('button')
-                button.textContent = 'Edit'
-                button.id = row[index2]
-                button.onclick = function(click){
-                    key = click['target']['id']
-                    x = prompt('Edit The Website')
-                    hash[key] = x
+        /*hashInLocalStorage = JSON.parse(localStorage.getItem('zzz') || 'null')
+        if(hashInLocalStorage){
+            hash = hashInLocalStorage
+        }*/
+
+    //ergodic keys , creat kbd
+            index = 0
+            while(index < keys.length){  // 0 1 2
+                div = document.createElement('div')
+                div.className = 'row'
+                main.appendChild(div)
+                row = keys[index]
+                index2 = 0
+                while(index2 < row.length){  // 10 9 8
+                    kbd = document.createElement('kbd')
+                    kbd.textContent = row[index2]   // ! 1.how to write in 2.row ['index2'] will cause 'undefind'
+                    kbd.className = 'key1'
+                    div.appendChild(kbd)
+                    button = document.createElement('button')
+                    kbd.appendChild(button)
+                    button.textContent = 'Edit'
+                    button.onclick = function(click){
+                        key = click['target']['id']
+                        x = prompt('Change Website In To')
+                        hash[key] = x  // ! change hash
+                        localStorage.setItem('zzz',JSON.stringify(hash))
+                    }
+                    index2 = index2 + 1 
                 }
-                kbd.appendChild(button)
-                div.appendChild(kbd)
-                index2 = index2 + 1
+               index = index + 1 
             }
-            index = index + 1
-        }
+            document.onkeypress = function(press){
+                key = press['key']  //'press' has all information
+                website = hash[key]
+                window.open('http://'+website,'_blank')
+            }
 
-        document.onkeypress = function(listen){
-            key = listen['key']
-            website = hash[key]
-            //location.href = 'http://'+website 在地址栏输入
-            window.open('http://'+website,'_blank') //在窗口打开
-        }
-      
-    
-</script>
+    </script>
 </body>
-</html>
 
+</html>
