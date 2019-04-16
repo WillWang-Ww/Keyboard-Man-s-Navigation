@@ -1,9 +1,19 @@
 *{margin: 0;padding: 0;}
 a{text-decoration: none;}
-
-kbd > button{
-    position: absolute; right: 0;bottom: 0;display: none;
+kbd{
+    width: 4em;
+    height: 4em;
+    display: inline-block;
+    text-transform: uppercase;
+    position: relative;
 }
+kbd > button{
+    position: absolute; 
+    right: 0;
+    bottom: 0;
+    display: none;
+}
+
 kbd:hover > button{
     display: inline-block;
 }
@@ -12,7 +22,6 @@ body{
     background-size: cover;
 }
 main{
-    
     text-align: center;
     display: flex;
     justify-content: center;
@@ -50,4 +59,9 @@ main{
 }
 .row .key1{
     margin: 0 10px;
+}
+.key img{
+    width: 16ox;
+    height: 16px;
+    
 }

@@ -43,15 +43,22 @@
                 index2 = 0
                 while(index2 < row.length){  // 10 9 8
                     kbd = document.createElement('kbd')
-                    kbd.textContent = row[index2]   // ! 1.how to write in 2.row ['index2'] will cause 'undefind'
+                    span = document.createElement('span')
+                    span.textContent = row[index2]   // ! 1.how to write in 2.row ['index2'] will cause 'undefind'
+                    span.className = 'text'
+                    kbd.appendChild(span)
                     kbd.className = 'key1'
                     div.appendChild(kbd)
                     button = document.createElement('button')
                     kbd.appendChild(button)
                     button.textContent = 'Edit'
+                    button.id = row[index2]
+                    img = document.createElement('img')
+                    img.src = 'http://'+hash[row[index2]] + '/favicon.ico'
+                    kbd.appendChild(img)
                     button.onclick = function(click){
                         key = click['target']['id']
-                        x = prompt('Change Website In To')
+                        x = prompt('Change Website Into')
                         hash[key] = x  // ! change hash
                         localStorage.setItem('zzz',JSON.stringify(hash))
                     }
